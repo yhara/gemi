@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "bin/gemi",
+     "gemi.gemspec",
      "gemirc.yml"
   ]
   s.homepage = %q{http://github.com/yhara/gemi}

@@ -1,0 +1,73 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require 'fileutils'
+require 'yaml'
+
+class Gemi
+  GEMIRC = File.expand_path("~/.gemirc")
+
+  def initialize(arg)
+    @arg = arg
+    @rubys = []
+  end
+
+  def run
+    if gemirc_exists?
+      Gemi.usage! if @arg.empty?
+
+      @rubys = load_gemirc
+      install_gems
+    else
+      setup
+    end
+  end
+
+  def gemirc_exists?
+    File.exist?(GEMIRC)
+  end
+
+  def load_gemirc
+    YAML.load_file(GEMIRC)
+  end
+
+  def install_gems
+    @rubys.each do |ruby|
+      puts "------- installing for #{ruby[:name]} ..."
+      cmd = "#{ruby[:command]} install #{@arg} #{ruby[:options]}"
+      puts cmd
+      system cmd
+    end
+  end
+
+  def setup
+    create_gemirc
+    puts "Created #{GEMIRC}"
+    puts "please edit it before using gemi."
+  end
+
+  def create_gemirc
+    template_path = File.expand_path("../gemirc.yml", File.dirname(__FILE__))
+    FileUtils.cp(template_path, GEMIRC)
+  end
+
+  # command line options
+
+  @opt = OptionParser.new{|o|
+    o.on("-h", "--help"){
+      Gemi.usage!
+    }
+  }
+
+  def self.parse_argv
+    @opt.parse!(ARGV)
+
+    return ARGV.join(" ")
+  end
+
+  def self.usage!
+    puts @opt.to_s
+    exit
+  end
+end
+
+Gemi.new(Gemi.parse_argv).run

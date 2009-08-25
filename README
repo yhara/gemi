@@ -1,0 +1,35 @@
+= gemi
+
+gemi is a simple tool for installing gems for multiple rubys.
+
+== Install
+
+1. gem install gemcutter
+
+2. gem tumble
+
+3. gem install gemi
+
+or:
+
+  gem install gemi --source=http://gemcutter.org
+
+== Setup
+
+ $ gemi
+
+then edit ~/.gemirc
+
+== Usage
+
+ $ gemi foobar
+
+installs the gem 'foobar' for your rubys.
+
+== Contact
+
+http://github.com/yhara/gemi
+
+yhara (Yutaka HARA)
+yutaka.hara.gmail.com
+http://route477.net/

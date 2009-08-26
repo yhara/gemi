@@ -53,7 +53,8 @@ class Gemi
   # command line options
 
   @opt = OptionParser.new{|o|
-    o.on("-h", "--help"){
+    o.banner = "Usage: #$0 foo bar [gem-options] [options]\nOptions:"
+    o.on("-h", "--help", "show this message"){
       Gemi.usage!
     }
   }

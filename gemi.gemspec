@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gemi}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Yutaka HARA"]
-  s.date = %q{2009-08-25}
+  s.date = %q{2009-08-26}
   s.default_executable = %q{gemi}
   s.description = %q{Installing gems for multiple rubys}
   s.email = %q{yutaka.hara/at/gmail.com}

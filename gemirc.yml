@@ -1,10 +1,12 @@
 - :name: 'MRI 1.8'       # used just for showing messages
   :command: 'sudo gem'   # gem command to install
   :options:              # options for 'gem install'
+#  :gem_home: ~/.gem1.8
 
 - :name: 'MRI 1.9'
   :command: 'gem-1.9'
   :options: '--format-executable'  # install bin/foobar as foobar-1.9
+#  :gem_home: ~/.gem1.9
 
 
 

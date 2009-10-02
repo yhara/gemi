@@ -22,6 +22,8 @@ class Gemi
     end
   end
 
+  private
+
   def gemirc_exists?
     File.exist?(GEMIRC)
   end
@@ -33,9 +35,19 @@ class Gemi
   def install_gems
     @rubys.each do |ruby|
       puts "------- installing for #{ruby[:name]} ..."
-      cmd = "#{ruby[:command]} install #{@arg} #{ruby[:options]}"
+      cmd = "#{gem_home(ruby)} #{ruby[:command]} install #{@arg} #{ruby[:options]}"
       puts cmd
       system cmd
+    end
+  end
+
+  def gem_home(ruby)
+    if ruby[:gem_home]
+      # Note: single quote(') is needed to run the command in shell
+      # see the reference of Kernel#system
+      "GEM_HOME='#{File.expand_path ruby[:gem_home]}'"
+    else
+      ""
     end
   end
 

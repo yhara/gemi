@@ -1,0 +1,7 @@
+2009-10-03 version 0.0.5
+
+  * fix: gem options can be given
+
+2009-08-26 version 0.0.4
+
+  * initial release

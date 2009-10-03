@@ -65,14 +65,19 @@ class Gemi
   # command line options
 
   @opt = OptionParser.new{|o|
-    o.banner = "Usage: #$0 foo bar [gem-options] [options]\nOptions:"
+    o.banner = "Usage: #$0 [gemi-options] foo bar [gem-options]\n" +
+               "Gemi Options:"
     o.on("-h", "--help", "show this message"){
       Gemi.usage!
     }
   }
 
   def self.parse_argv
-    @opt.parse!(ARGV)
+    gemi_opts = []
+    while ARGV[0] =~ /\A-/
+      gemi_opts.push ARGV.shift
+    end
+    @opt.parse!(gemi_opts)
 
     return ARGV.join(" ")
   end

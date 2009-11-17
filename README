@@ -1,34 +1,95 @@
-= gemi
+gemi
+====
 
 gemi is a simple tool for installing gems for multiple rubys.
 
-== Install
+Install
+-------
 
-1. gem install gemcutter
+Install gemcutter, and:
 
-2. gem tumble
+    $ gem install gemi
 
-3. gem install gemi
+Setup
+-----
 
-or:
+    $ gemi
 
-  gem install gemi --source=http://gemcutter.org
+then ~/.gemirc is created. Edit it for your environment. Example:
 
-== Setup
+    rubys: 
+      - name: 'MRI 1.8'
+        command: 'gem'
+        install_options: '--no-format-executable --user-install'
+      - name: 'MRI 1.9'
+        command: 'gem-1.9'
+        install_options: '--format-executable --user-install'
 
- $ gemi
+Usage
+-----
 
-then edit ~/.gemirc
-
-== Usage
-
- $ gemi foobar
+    $ gemi foobar
 
 installs the gem 'foobar' for your rubys.
 
-== Contact
+### Install gems
+
+    $ gemi foo bar
+    (= gem install foo bar)
+
+:install_options: is appended.
+
+You can also install gems defined in a YAML file:
+
+    $ gemi some_gems.yml
+
+some_gems.yml is like:
+
+    install_native: true
+    gems:
+      - name: 'ruby-openid'
+        version: '2.1.4'
+
+      - name: 'nokogiri'
+        version: '1.4.0'
+        native: true
+
+### Uninstall gems
+
+    $ gemi -d foo bar
+    (= gem uninstall foo bar)
+
+:uninstall_options: is appended.
+
+### Update gems
+
+    $ gemi -u foo bar
+    (= gem upgrade foo bar)
+
+:update_options: is appended.
+
+### Cleanup old gems
+
+    $ gemi -c foo bar
+    (= gem cleanup foo bar)
+
+:cleanup_options: is appended.
+
+### Other gem commands
+
+    $ gemi -- list
+    (= gem list)
+
+The arguments after '--' are passed to each gem command.
+(Note that 'gemi list' is expanded to 'gem install list'!)
+
+Repository
+----------
 
 http://github.com/yhara/gemi
+
+Authors
+-------
 
 yhara (Yutaka HARA)
 yutaka.hara.gmail.com

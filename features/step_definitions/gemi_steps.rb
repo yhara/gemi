@@ -34,7 +34,11 @@ When /^I run gemi with (.*)$/ do |args_str|
   @cmds = cmds
 end
 
-Then /^it should execute the (.*)$/ do |cmd|
+Then /^it should execute the commands (.*)$/ do |cmds|
+  @cmds.should == cmds.split(/\s*,\s*/)
+end
+
+Then /^it should execute the (?!commands )(.*)$/ do |cmd|
   @cmds.first.rstrip.should == cmd
 end
 

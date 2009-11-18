@@ -28,8 +28,15 @@ module Gemi
     end
 
     def load_conf
-      if !File.exist?(@opt.confpath)
-        if @opt.confpath == GEMIRC and @opt.yamls.empty?
+      conf_exist = File.exist?(@opt.confpath)
+      yaml_given = !@opt.yamls.empty?
+
+      if conf_exist 
+        Conf.new(@opt.confpath)
+      else
+        if yaml_given
+          Conf.new(nil)
+        elsif @opt.confpath == GEMIRC
           create_conf
           return
         else
@@ -37,7 +44,6 @@ module Gemi
           return
         end
       end
-      Conf.new(@opt.confpath)
     end
 
     def execute_commands(conf)

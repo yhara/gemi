@@ -18,8 +18,12 @@ module Gemi
     end
 
     def initialize(yaml_path)
-      yaml = YAML.load_file(yaml_path)
-      @rubys = parse_rubys(yaml["rubys"])
+      if yaml_path
+        yaml = YAML.load_file(yaml_path)
+        @rubys = parse_rubys(yaml["rubys"])
+      else
+        @rubys = [Ruby::Default]
+      end
     end
     attr_reader :rubys
 

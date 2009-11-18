@@ -12,7 +12,7 @@ Given /^a yaml file named "([^\"]*)" with:$/ do |filename, content|
   }
 end
 
-When /^I run gemi with (.*)$/ do |args_str|
+When /^I run gemi with '(.*)'$/ do |args_str|
   argv = args_str.split.map{|arg|
     if arg =~ /.ya?ml\z/
       File.join(GemiWorld::TMP_DIR, arg)
@@ -34,11 +34,11 @@ When /^I run gemi with (.*)$/ do |args_str|
   @cmds = cmds
 end
 
-Then /^it should execute the commands (.*)$/ do |cmds|
+Then /^it should execute the commands '(.*)'$/ do |cmds|
   @cmds.should == cmds.split(/\s*,\s*/)
 end
 
-Then /^it should execute the (?!commands )(.*)$/ do |cmd|
+Then /^it should execute '(.*)'$/ do |cmd|
   @cmds.first.rstrip.should == cmd
 end
 

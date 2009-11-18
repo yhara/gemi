@@ -7,8 +7,8 @@ Feature: With gems.yaml
         - name: foo
         - name: bar
       """
-    When I run gemi with <args>
-    Then it should execute the <gem_command>
+    When I run gemi with '<args>'
+    Then it should execute '<gem_command>'
 
     Examples:
       | args         | gem_command           | 
@@ -26,8 +26,8 @@ Feature: With gems.yaml
         - name: bar
           version: 0.2
       """
-    When I run gemi with <args>
-    Then it should execute the <gem_command>
+    When I run gemi with '<args>'
+    Then it should execute '<gem_command>'
 
     Examples:
       | args                      | gem_command                                         |

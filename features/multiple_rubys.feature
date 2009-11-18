@@ -10,8 +10,8 @@ Feature: Multiple Rubys
       """
 
   Scenario Outline:
-    When I run gemi with <args>
-    Then it should execute the commands <gem_commands>
+    When I run gemi with '<args>'
+    Then it should execute the commands '<gem_commands>'
 
     Examples:
       | args   | gem_commands                              | 

@@ -8,8 +8,8 @@ Feature: Basic commands
       """
 
   Scenario Outline: Simple cases
-    When I run gemi with <args>
-    Then it should execute the <gem_command>
+    When I run gemi with '<args>'
+    Then it should execute '<gem_command>'
 
     Examples:
       | args                | gem_command           | 
@@ -22,8 +22,8 @@ Feature: Basic commands
       | --clean foo bar     | gem clean foo bar     | 
 
   Scenario Outline: With options for gem command
-    When I run gemi with <args>
-    Then it should execute the <gem_command>
+    When I run gemi with '<args>'
+    Then it should execute '<gem_command>'
 
     Examples:
       | args                  | gem_command                      | 
@@ -31,8 +31,8 @@ Feature: Basic commands
       | -u foo --user-install | gem uninstall foo --user-install | 
 
   Scenario Outline: With verbatim args
-    When I run gemi with <args>
-    Then it should execute the <gem_command>
+    When I run gemi with '<args>'
+    Then it should execute '<gem_command>'
 
     Examples:
       | args             | gem_command | 

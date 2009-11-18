@@ -20,6 +20,7 @@ Feature: Config file
       | args                       | gem_command                      | 
       | -r myconf.yml foo bar      | mygem install foo bar --myoption | 
       | --rc myconf.yml -u foo bar | mygem uninstall foo bar          | 
+      | --rc myconf.yml -- stale   | mygem stale                      | 
 
   Scenario: Use default settings if yaml is given
     # Note: this is tested in gems_yaml.feature

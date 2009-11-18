@@ -14,7 +14,7 @@ end
 
 When /^I run gemi with '(.*)'$/ do |args_str|
   argv = args_str.split.map{|arg|
-    if arg =~ /.ya?ml\z/
+    if arg =~ Gemi::REXP_YAML
       File.join(GemiWorld::TMP_DIR, arg)
     else
       arg

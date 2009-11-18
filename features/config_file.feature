@@ -17,8 +17,9 @@ Feature: Config file
     Then it should execute '<gem_command>'
 
     Examples:
-      | args                  | gem_command                      | 
-      | -r myconf.yml foo bar | mygem install foo bar --myoption | 
+      | args                       | gem_command                      | 
+      | -r myconf.yml foo bar      | mygem install foo bar --myoption | 
+      | --rc myconf.yml -u foo bar | mygem uninstall foo bar          | 
 
   Scenario: Use default settings if yaml is given
     # Note: this is tested in gems_yaml.feature

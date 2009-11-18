@@ -7,15 +7,13 @@ class GemiWorld
 
   # Path of config file to use temporarily
   GEMIRC_TMP = File.join(TMP_DIR, "gemirc")
-
-  def self.init
-    # Replace the content of the constant (hack!)
-    Gemi::GEMIRC.replace GEMIRC_TMP
-  end
+  
+  # Replace the content of the constant (hack!)
+  Gemi::GEMIRC.replace GEMIRC_TMP
 end
 
 Before do
-  GemiWorld.init
+  File.unlink GemiWorld::GEMIRC_TMP if File.exist? GemiWorld::GEMIRC_TMP
 end
 
 World do

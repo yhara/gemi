@@ -28,15 +28,17 @@ module Gemi
     def parse(argv)
       confpath = GEMIRC
 
-      case 
-      when %w(-r --rc).include?(argv.first)
+      if %w(-r --rc).include?(argv.first)
         confpath = argv[1]
         if not File.exist?(confpath)
           raise ConfNotFound, "config file not found in #{confpath}"
           exit
         end
-        return parse_argv(argv[2..-1])
+        argv.shift
+        argv.shift
+      end
 
+      case 
       when TYPES.key?(argv.first)
         type = TYPES[argv.first]
         args = argv[1..-1]

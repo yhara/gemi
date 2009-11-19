@@ -17,7 +17,7 @@ Feature: With gems.yaml
       | -n names.yml | *ERROR*               | 
       | -c names.yml | *ERROR*               | 
 
-  Scenario Outline: Yaml containing names and versions
+  Scenario Outline: Yaml containing versions
     Given a yaml file named "names_and_versions.yml" with:
       """
       gems:
@@ -33,3 +33,20 @@ Feature: With gems.yaml
       | args                      | gem_command                                         |
       | names_and_versions.yml    | gem install foo -v 0.1 ; gem install bar -v 0.2     | 
       | -u names_and_versions.yml | gem uninstall foo -v 0.1 ; gem uninstall bar -v 0.2 | 
+
+  Scenario Outline: Yaml containing options
+    Given a yaml file named "names_and_options.yml" with:
+      """
+      gems:
+        - name: foo
+          install_options: --with-foo
+        - name: bar
+          version: 0.2
+      """
+    When I run gemi with '<args>'
+    Then it should execute '<gem_command>'
+
+    Examples:
+      | args                     | gem_command                                         |
+      | names_and_options.yml    | gem install foo --with-foo ; gem install bar -v 0.2     | 
+      | -u names_and_options.yml | gem uninstall foo ; gem uninstall bar -v 0.2 | 

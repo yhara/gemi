@@ -11,9 +11,10 @@ module Gemi
     end
 
     def build(ruby)
-      if @gems.any?(&:version)
-        cmds = @gems.map{|g| build_command(g.to_command, ruby)}
-        cmds.join(" ; ")
+      if @gems.any?{|gem| gem.version or gem.options[@type]}
+        @gems.map{|gem|
+          build_command(gem.to_command(@type), ruby)
+        }.join(" ; ")
       else
         gem_names = @gems.map(&:name).join(" ")
         build_command(gem_names, ruby)

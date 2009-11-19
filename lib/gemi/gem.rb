@@ -1,30 +1,37 @@
 module Gemi
   class Gem
+
+    class OptionNotSupported < Gemi::Error; end
+
     # Returns an array of Gem
     def self.from_yaml(yaml)
       return [] unless yaml["gems"]
 
       yaml["gems"].map{|spec|
-        new(spec["name"], spec["version"], spec["native"])
+        options = {
+          :install => spec["install_options"],
+          :uninstall => spec["uninstall_options"],
+        }
+        %w(update_options clean_options).each do |key|
+          if spec[key]
+            raise OptionNotSupported, "you cannot specify #{key} in YAML file"
+          end
+        end
+        new(spec["name"], spec["version"], options)
       }
     end
 
-    def initialize(name, version=nil, native=false)
-      @name, @version, @native = name, version, native
+    def initialize(name, version=nil, options={})
+      @name, @version, @options = name, version, options
     end
 
-    attr_reader :name, :version
+    attr_reader :name, :version, :options
 
-    def native?
-      @native
-    end
-
-    def to_command
-      if @version
-        "#{@name} -v #{@version}"
-      else
-        "#{@name}"
-      end
+    def to_command(type)
+      s = @name
+      s << " -v #{@version}" if @version
+      s << " #{@options[type]}" if @options[type]
+      s
     end
 
   end

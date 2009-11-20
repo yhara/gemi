@@ -13,4 +13,5 @@ Jeweler::Tasks.new do |gemspec|
   gemspec.homepage = "http://github.com/yhara/#{PROJECT_NAME}"
   gemspec.description = gemspec.summary
   gemspec.authors = ["Yutaka HARA"]
+  gemspec.add_development_dependency('cucumber', '>= 0.4.2')
 end

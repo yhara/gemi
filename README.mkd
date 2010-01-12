@@ -1,0 +1,148 @@
+gemi
+====
+
+Gemi is a simple tool for installing gems for multiple rubys.
+It also can install specific versions of the gems listed in a YAML file.
+
+without gemi, you need to type 'install' for all your rubys:
+
+    $ gem install foo bar baz quux
+    $ gem-1.9 install foo bar baz quux
+
+with gemi, it's just:
+
+    $ gemi foo bar baz quux
+
+or even:
+
+    $ gemi gems.yml
+
+Install
+-------
+
+    $ gem install gemi
+
+Setup
+-----
+
+First, execute gemi without any options:
+
+    $ gemi
+
+then ~/.gemirc is created. Edit it for your environment.
+
+Example:
+
+    rubys: 
+      - name: 'MRI 1.8'
+        command: 'gem'
+        install_options: '--no-format-executable --user-install'
+      - name: 'MRI 1.9'
+        command: 'gem-1.9'
+        install_options: '--format-executable --user-install'
+
+Usage
+-----
+
+First of all,
+
+    $ gemi foo
+
+will install the gem 'foo' for all your rubys.
+
+gemi can also uninstall, update, or cleanup the gems.
+
+### Install gems
+
+Just give the names of the gems to gemi.
+
+    $ gemi foo bar   (= gem install foo bar)
+
+You can also install gems defined in a YAML file:
+
+    $ gemi gems.yml
+
+Example of gems.yml:
+
+    gems:
+      - name: 'ruby-openid'
+        version: '2.1.4'
+
+      - name: 'nokogiri'
+        version: '1.4.0'
+        install_options: --with-foo
+
+### Uninstall gems
+
+Specify '-d' for "gem uninstall".
+
+    $ gemi -d foo bar   (= gem uninstall foo bar)
+
+### Update gems
+
+Specify '-u' for "gem upgrade".
+
+    $ gemi -u foo bar   (= gem upgrade foo bar)
+
+### Cleanup old gems
+
+Specify '-c' for "gem cleanup".
+
+    $ gemi -c foo bar   (= gem cleanup foo bar)
+
+### Other gem commands
+
+With '--', you can run any gem commands for rubys:
+
+    $ gemi -- list --local     (= gem list --local)
+
+The arguments after '--' are passed to each gem command.
+(Note that 'gemi list' is expanded to 'gem install list'!)
+
+Configuration
+-------------
+
+### .gemirc
+
+~/.gemirc contains the information about each gem commands.
+
+Example:
+
+      rubys:
+        - name: Ruby 1.8
+          command: gem
+        - name: Ruby 1.9
+          command: gem-1.9
+          install_options: --foo
+          uninstall_options: --bar
+          update_options: --baz
+          clean_options: --quux
+
+{install,uninstall,update,clean}_options will be appended to the
+arguments. In this case, the command:
+
+    $ gemi a b c
+
+resuls in running these two gem commands.
+
+    $ gem install a b c --foo
+    $ gem-1.9 install a b c --foo
+
+### Alternative .gemirc
+
+You can specify an alternative gemirc with '-r' (or '--rc').
+
+Example: use myconf.yml instead of ~/.gemirc
+
+    $ gemi -r myconf.yml foo bar
+
+Repository
+----------
+
+http://github.com/yhara/gemi
+
+Authors
+-------
+
+yhara (Yutaka HARA) yutaka.hara.gmail.com
+http://route477.net/

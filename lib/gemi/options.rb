@@ -28,6 +28,10 @@ module Gemi
     def parse(argv)
       confpath = GEMIRC
 
+      if %w(-h --help).any?{|o| argv.include?(o)}
+        return confpath, nil, [], []
+      end
+
       if %w(-r --rc).include?(argv.first)
         confpath = argv[1]
         if not File.exist?(confpath)

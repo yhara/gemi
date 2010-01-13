@@ -70,6 +70,7 @@ module Gemi
         "  -c, --clean     : gem clean",
         "  --              : pass the arguments to gem commands",
         "  -r PATH         : specify the path of gemirc",
+        "  -h, --help      : show this message",
       ].join("\n")
     end
 

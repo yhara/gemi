@@ -5,40 +5,74 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gemi}
-  s.version = "0.0.5"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Yutaka HARA"]
-  s.date = %q{2009-10-03}
+  s.date = %q{2010-01-13}
   s.default_executable = %q{gemi}
-  s.description = %q{Installing gems for multiple rubys}
+  s.description = %q{  gemi runs 'gem install' for each your rubys.
+  Example:
+    without gemi:
+    $ gem install foo bar
+    $ gem-1.9 install foo bar
+    with gemi:
+    $ gemi foo bar
+}
   s.email = %q{yutaka.hara/at/gmail.com}
   s.executables = ["gemi"]
   s.extra_rdoc_files = [
-    "README"
+    "README.mkd"
   ]
   s.files = [
-    "History.txt",
-     "README",
+    ".gitignore",
+     "History.txt",
+     "README.mkd",
      "Rakefile",
      "VERSION",
      "bin/gemi",
+     "features/basic_commands.feature",
+     "features/command_specific_options.feature",
+     "features/config_file.feature",
+     "features/gems_yaml.feature",
+     "features/multiple_rubys.feature",
+     "features/step_definitions/gemi_steps.rb",
+     "features/support/env.rb",
+     "features/tmp/.gitignore",
      "gemi.gemspec",
-     "gemirc.yml"
+     "gemirc.yml",
+     "lib/gemi.rb",
+     "lib/gemi/commands.rb",
+     "lib/gemi/conf.rb",
+     "lib/gemi/gem.rb",
+     "lib/gemi/options.rb",
+     "lib/gemi/ruby.rb",
+     "lib/gemi/runner.rb"
   ]
   s.homepage = %q{http://github.com/yhara/gemi}
+  s.post_install_message = %q{    Thank you for installing gemi!
+    The format of ~/.gemirc is changed in gemi 0.1.0.
+    If you have been using gemi 0.0.x,
+    please modify it (see gemirc.yml)
+}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
-  s.summary = %q{Installing gems for multiple rubys}
+  s.summary = %q{gem command for multiple rubys}
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_development_dependency(%q<cucumber>, [">= 0.4.2"])
+      s.add_development_dependency(%q<kagemusha>, [">= 0"])
     else
+      s.add_dependency(%q<cucumber>, [">= 0.4.2"])
+      s.add_dependency(%q<kagemusha>, [">= 0"])
     end
   else
+    s.add_dependency(%q<cucumber>, [">= 0.4.2"])
+    s.add_dependency(%q<kagemusha>, [">= 0"])
   end
 end
